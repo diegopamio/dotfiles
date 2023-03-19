@@ -28,7 +28,7 @@ echo "installing homebrew"
 # install homebrew https://brew.sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/kentcdodds/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "/Users/$USER/.zprofile"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "brew installing stuff"
@@ -45,6 +45,16 @@ echo "brew installing stuff"
 brew install git hub libdvdcss ripgrep imagemagick watchman tree bat \
 git-delta switchaudio-osx pgcli ffmpeg
 
+echo "installing nvm"
+touch .zshrc
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+source .zshrc
+nvm install node
+nvm use node
+node -v
+npm -v
+nvm -v
+
 echo "installing node (via n-install)"
 curl -L https://git.io/n-install | bash
 
@@ -56,12 +66,7 @@ npm install --global serve fkill-cli npm-quick-run \
 semantic-release-cli npm-check-updates
 
 echo "installing apps with brew --cask"
-brew install --cask alfred google-chrome firefox brave-browser bettertouchtool divvy \
-bartender itsycal visual-studio-code 1password dash screenflow skype workflowy \
-sublime-text vlc discord obs handbrake zoom betterzip avibrazil-rdm sip \
-qlcolorcode qlmarkdown qlstephen quicklook-json webpquicklook \
-suspicious-package qlvideo spotify focus dropbox front slack openaudible \
-todoist audacity docker another-redis-desktop-manager loopback kid3
+brew install --cask bettertouchtool itsycal zoom slack google-chrome
 
 echo "Generating a new SSH key for GitHub"
 ssh-keygen -t ed25519 -C "me+github@kentcdodds.com" -f ~/.ssh/id_ed25519
