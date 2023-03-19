@@ -15,10 +15,6 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-###############################################################################
-# Kent's Customizations                                                       #
-###############################################################################
-
 echo "Hello $(whoami)! Let's get you set up."
 
 echo "mkdir -p ${HOME}/code"
@@ -45,6 +41,10 @@ echo "brew installing stuff"
 brew install git hub libdvdcss ripgrep imagemagick watchman tree bat \
 git-delta switchaudio-osx pgcli ffmpeg
 
+###############################################################################
+# Diego's Customizations                                                       #
+###############################################################################
+
 echo "installing nvm"
 touch .zshrc
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
@@ -66,7 +66,8 @@ npm install --global serve fkill-cli npm-quick-run \
 semantic-release-cli npm-check-updates
 
 echo "installing apps with brew --cask"
-brew install --cask bettertouchtool itsycal zoom slack google-chrome
+brew install --cask bettertouchtool itsycal zoom slack google-chrome \
+                    notion webstorm
 
 echo "Generating a new SSH key for GitHub"
 ssh-keygen -t ed25519 -C "me+github@kentcdodds.com" -f ~/.ssh/id_ed25519
@@ -77,7 +78,7 @@ ssh-add -K ~/.ssh/id_ed25519
 echo "run 'pbcopy < ~/.ssh/id_ed25519.pub' and paste that into GitHub"
 
 echo "cloning dotfiles"
-git clone git@github.com:kentcdodds/dotfiles.git "${HOME}/dotfiles"
+git clone git@github.com:diegopamio/dotfiles.git "${HOME}/dotfiles"
 ln -s "${HOME}/dotfiles/.zshrc" "${HOME}/.zshrc"
 ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 ln -s "${HOME}/dotfiles/.gitconfig" "${HOME}/.gitconfig"
@@ -888,6 +889,20 @@ for app in "Activity Monitor" \
   killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
+
+printf "TODO:\n\
+install: \n\
+  battery indicator (App Store) \n\
+  Runcat (App Store) \n\
+\n\
+Restart Terminal.app\n\
+copy git config from your backup/re-login \n\
+copy .npmrc from your backup/re-login \n\
+run: \n\
+  itsycal \n\
+  bettertouchtool \n\
+login to literally everything \n\
+"
 
 
 printf "TODO:\n\
